@@ -1,0 +1,35 @@
+pretrain:
+resume:
+data:
+    input_size: 224
+    seg_num: 8
+    seg_length: 1
+    batch_size: 4
+    image_tmpl: 'frame_{:05d}.png'
+    train_list: './lists/train_frames.txt'
+    val_list: './lists/test_frames.txt'
+    label_list: './lists/SurgVisDom_labels.csv'
+    train_root_dir:
+    val_root_dir:
+    index_bias: 1
+    random_shift: True
+    alpha: 0.5
+    randaug:
+        enabled: False
+        N: 4
+        M: 9
+    prompt_type: 2 # 1,2,3,4
+network:
+    arch: ViT-B/16
+    fusion_model_layers: 6
+solver:
+    epochs: 30
+    start_epoch: 0
+    lr: 1.e-5
+    weight_decay: 1.e-4
+    ratio: 1.0
+    f_ratio: 10.0
+    lambda_aug: 0.8
+    lambda_sup: 0.4
+logging:
+    eval_freq: 5
