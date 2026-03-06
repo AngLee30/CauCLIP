@@ -1,8 +1,8 @@
 <h1 align="center">CauCLIP</h1>
 
 <p align="center">
-<b>CauCLIP: Bridging the Sim-to-real Gap in Surgical Video Understanding
-Via Causality-inspired Vision-Language Modeling</b>
+<b>CauCLIP: Bridging the Sim-to-Real Gap in Surgical Video Understanding
+Via Causality-Inspired Vision-Language Modeling</b>
 </p>
 
 <p align="center">
@@ -28,15 +28,13 @@ For each video in the **training set**:
 * Create a folder named after the video (without the file extension).
 * Extract all frames from the video and place them inside the corresponding folder.
 * Name each frame using the format:
-
 ```
 frame_{:05d}.png
 ```
-
 * Frame indexing starts from `00001`.
 * Each video maintains its own independent frame numbering.
 
-Example
+**Example**
 
 ```
 train_root_dir/
@@ -56,22 +54,19 @@ For each video in the **validation set**:
 * Split the frames into groups of 128 frames.
 * Each group should be stored in a separate folder.
 * The folder name should follow the format:
-
 ```
 {video_name}_{group_id}
 ```
-
 where `group_id` starts from `000` and increases sequentially.
 
 Inside each group folder:
 
 * Frames should also be named using the format:
-
 ```
 frame_{:05d}.png
 ```
 
-Example
+**Example**
 
 ```
 val_root_dir/
@@ -122,3 +117,4 @@ Run the training script:
 ```bash
 python train.py
 ```
+
