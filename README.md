@@ -19,7 +19,11 @@ Cheng Xue*</a>
 Southeast University
 </p>
 
-## 1. Data Preparation
+## 1. Introduction
+
+This repository provides the standardized implementation of our proposed framework, **CauCLIP**, for **surgical phase recognition** under domain shift.
+
+## 2. Data Preparation
 
 Extract frames from each video in the **SurgVisDom** (MICCAI 2020 sub-challenge) dataset:
 
@@ -81,7 +85,7 @@ val_root_dir/
 ├── ...
 ```
 
-## 2. Configuration
+## 3. Configuration
 
 Edit the configuration file:
 
@@ -96,7 +100,7 @@ Set the following fields:
 
 Other hyperparameters in the configuration file can also be modified if needed.
 
-## 3. Install Dependencies
+## 4. Install Dependencies
 
 Install **PyTorch** (recommended version):
 
@@ -110,7 +114,7 @@ Then install the required packages:
 pip install -r requirements.txt
 ```
 
-## 4. Training
+## 5. Training
 
 Run the training script:
 
