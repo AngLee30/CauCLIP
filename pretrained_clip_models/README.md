@@ -1,0 +1,1 @@
+Add the [OpenAI CLIP](https://github.com/openai/CLIP) pretrained weights (ViT-B/16) to `./pretrained_clip_models/`.
