@@ -1,1 +1,1 @@
-Add the [OpenAI CLIP](https://github.com/openai/CLIP) pretrained weights (ViT-B/16) to `./pretrained_clip_models/`.
+Download the [OpenAI CLIP](https://github.com/openai/CLIP) (ViT-B/16) pretrained weights to `./pretrained_clip_models/`.
