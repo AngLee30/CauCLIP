@@ -21,13 +21,13 @@ Southeast University
 
 ## 1. Introduction
 
-This repository provides the standardized implementation of our proposed framework, **CauCLIP**, for **surgical phase recognition** under domain shift.
+This repository provides a standardized implementation of our proposed framework, **CauCLIP**, for **surgical phase recognition** under domain shift.
 
 ## 2. Data Preparation
 
-Extract frames from each video in the **SurgVisDom** (MICCAI 2020 sub-challenge) dataset:
+Extract frames from each video in the [**SurgVisDom** (MICCAI 2020 sub-challenge)](https://surgvisdom.grand-challenge.org/) dataset:
 
-For each video in the **training set**:
+**For each video in the training set:**
 
 * Create a folder named after the video (without the file extension).
 * Extract all frames from the video and place them inside the corresponding folder.
@@ -53,7 +53,7 @@ train_root_dir/
 ├── ...
 ```
 
-For each video in the **validation set**:
+**For each video in the validation set:**
 
 * Split the frames into groups of 128 frames.
 * Each group should be stored in a separate folder.
