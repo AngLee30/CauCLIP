@@ -6,12 +6,6 @@ Via Causality-Inspired Vision-Language Modeling</b>
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2602.06619">
-    <img src="https://img.shields.io/badge/Paper-arXiv-b31b1b" />
-  </a>
-</p>
-
-<p align="center">
 <b>ICASSP 2026</b>
 </p>
 
@@ -24,6 +18,14 @@ Cheng Xue*</a>
 <p align="center">
 Southeast University
 </p>
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2602.06619">
+    <img src="https://img.shields.io/badge/Paper-arXiv-b31b1b" />
+  </a>
+</p>
+
+---
 
 ## 1. Introduction
 
