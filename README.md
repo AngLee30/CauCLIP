@@ -25,8 +25,6 @@ Southeast University
   </a>
 </p>
 
----
-
 ## 1. Introduction
 
 This repository provides a standardized implementation of our proposed framework, **CauCLIP**, for **surgical phase recognition** under domain shift.
