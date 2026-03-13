@@ -222,7 +222,7 @@ class VisionTransformer(nn.Module):
             stride=patch_size, 
             bias=False
         ) # each kernel has a shape of (3, 16, 16) and there are 768 kernels in total,
-          # the weight of self.conv1 is (768, 3, 16, 16) = (width, c, h, w)
+          # the weight of self.conv1 is (width, c, h, w) = (768, 3, 16, 16).
 
         scale = width ** -0.5
         self.class_embedding = nn.Parameter(scale * torch.randn(width))
@@ -234,16 +234,17 @@ class VisionTransformer(nn.Module):
         self.proj = nn.Parameter(scale * torch.randn(width, output_dim)) # (768, 512)
 
     def forward(self, x: torch.Tensor):
-        x = self.conv1(x)  # shape = (*, width, grid, grid), grid = input_resolution // patch_size  (*, 768, 14, 14)
-        x = x.reshape(x.shape[0], x.shape[1], -1)  # shape = (*, width, grid ** 2)                  (*, 768, 196)
-        x = x.permute(0, 2, 1)  # shape = (*, grid ** 2, width)                                     (*, 196, 768)
-        x = torch.cat([self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device), x], dim=1)  # shape = (*, grid ** 2 + 1, width)  (*, 197, 768)
-        x = x + self.positional_embedding.to(x.dtype) # shape = (*, grid ** 2 + 1, width)           (*, 197, 768)
+        # x: (*, c, h, w)
+        x = self.conv1(x)  # (*, width, grid, grid), grid = input_resolution // patch_size  (*, 768, 14, 14)
+        x = x.reshape(x.shape[0], x.shape[1], -1)  # (*, width, grid ** 2)                  (*, 768, 196)
+        x = x.permute(0, 2, 1)  # (*, grid ** 2, width)                                     (*, 196, 768)
+        x = torch.cat([self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device), x], dim=1)  # (*, grid ** 2 + 1, width)  (*, 197, 768)
+        x = x + self.positional_embedding.to(x.dtype) # (*, grid ** 2 + 1, width)           (*, 197, 768)
         x = self.ln_pre(x) # (*, 197, 768)
 
-        x = x.permute(1, 0, 2) # (*, 197, 768) -> (197, *, 768)
+        x = x.permute(1, 0, 2)  # (*, 197, 768) -> (197, *, 768)
         x = self.transformer(x) # (197, *, 768)
-        x = x.permute(1, 0, 2) # (*, 197, 768)
+        x = x.permute(1, 0, 2)  # (*, 197, 768)
 
         x = self.ln_post(x[:, 0, :]) # x[:, 0, :] has a shape of (*, 768), refers to the class embedding
 
@@ -302,8 +303,8 @@ class CLIP(nn.Module):
         )
 
         self.vocab_size = vocab_size # 49408
-        self.token_embedding = nn.Embedding(vocab_size, transformer_width) # text sequence -> token_id sequence -> token embedding sequence
-        self.positional_embedding = nn.Parameter(torch.empty(self.context_length, transformer_width))
+        self.token_embedding = nn.Embedding(vocab_size, transformer_width) # (49408, 512)
+        self.positional_embedding = nn.Parameter(torch.empty(self.context_length, transformer_width)) # (77, 512)
         self.ln_final = LayerNorm(transformer_width)
 
         self.text_projection = nn.Parameter(torch.empty(transformer_width, embed_dim)) # (512, 512)
@@ -360,7 +361,7 @@ class CLIP(nn.Module):
 
     def encode_text(self, text):
         # text: (bs, 77)
-        x = self.token_embedding(text).type(self.dtype) # (bs, 77, 512)
+        x = self.token_embedding(text).type(self.dtype) # (bs, 77, 512) # token_id -> token_embedding
 
         x = x + self.positional_embedding.type(self.dtype)
         x = x.permute(1, 0, 2)  # NLD -> LND
