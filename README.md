@@ -6,7 +6,7 @@ Via Causality-Inspired Vision-Language Modeling</b>
 </p>
 
 <p align="center">
-<b>ICASSP 2026</b>
+<b>ICASSP 2026 (Oral)</b>
 </p>
 
 <p align="center">

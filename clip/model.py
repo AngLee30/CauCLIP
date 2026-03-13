@@ -369,7 +369,7 @@ class CLIP(nn.Module):
         x = self.ln_final(x).type(self.dtype) # layer norm
 
         # x.shape = [batch_size, n_ctx, transformer.width] = (bs, 77, 512)
-        # take features from the eot embedding (eot_token is the highest number (49407) in each sequence), while sot_token is 49406
+        # take features from the eot embedding (eot_token is the highest number (49407) in each sequence) and sot_token is 49406
         # text.argmax(dim=-1) returns the index of eot_token in each sequence
         x = x[torch.arange(x.shape[0]), text.argmax(dim=-1)] @ self.text_projection
 

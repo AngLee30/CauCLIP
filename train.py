@@ -189,13 +189,11 @@ def main():
             image_embedding = image_encoder(images) # (bs*T, 512)
             image_embedding = image_embedding.view(b, t, -1) # (bs, T, 512)
             orig_video_embedding = fusion_model(image_embedding) # (bs, 512)
-            #orig_video_embedding = torch.mean(image_embedding, dim=1, keepdim=False)
             assert torch.isfinite(orig_video_embedding).all()
 
             image_aug_embedding = image_encoder(images_aug) # (bs*T, 512)
             image_aug_embedding = image_aug_embedding.view(b, t, -1) # (bs, T, 512)
             aug_video_embedding = fusion_model(image_aug_embedding) # (bs, 512)
-            #aug_video_embedding = torch.mean(image_aug_embedding, dim=1, keepdim=False)
             assert torch.isfinite(aug_video_embedding).all()
 
             #x = orig_video_embedding
@@ -205,7 +203,7 @@ def main():
             #print(x @ y.t()) # cosine similarity matrix
             #exit()
             # Above is a simple unit test, if no augmentation is implemented (alpha = 0.0),
-            # the values on the main diagonal of the resulting matrix should be all close to 1.
+            # the values on the main diagonal of the cosine similarity matrix should be all close to 1.
 
             # ================ generate embedding for text ================
             text_id = numpy.random.randint(num_text_aug, size=len(labels)) # numpy.ndarray
